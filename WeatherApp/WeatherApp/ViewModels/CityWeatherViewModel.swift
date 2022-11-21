@@ -1,0 +1,54 @@
+//
+//  CityWeatherViewModel.swift
+//  WeatherApp
+//
+//  Created by Ningyuan Gao on 11/21/22.
+//
+
+import Foundation
+import SwiftUI
+
+class CityWeatherViewModel: ObservableObject {
+    @Published var cityWeatherModel: CityWeatherModel
+    @Published var errorTitle: String = ""
+    @Published var errorMessage: String = ""
+    @Published var showErrorAlert: Bool = false
+
+    var timer: Timer?
+    init(city: City) {
+        self.cityWeatherModel = CityWeatherModel(city: city)
+        self.refresh()
+        timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true, block: { _ in
+            self.refresh()
+        })
+    }
+    deinit {
+        timer?.invalidate()
+    }
+    
+    func refresh() {
+        OpenWeatherAPIClient().fetchCurrentWeather(lat: cityWeatherModel.city.lat, lon: cityWeatherModel.city.lon) { (result) in
+            switch result {
+            case .success(let currentWeather):
+                DispatchQueue.main.async {
+                    self.cityWeatherModel.currentWeather = currentWeather
+                }
+            case .failure(let error):
+                switch error {
+                case .serverSideError(let statusCode, let message):
+                    self.errorTitle = "Status: \(statusCode)"
+                    self.errorMessage = message
+                    self.showErrorAlert = true
+                case .transportError:
+                    self.errorTitle = "Connection Issues"
+                    self.errorMessage = "Please Check the Internet Connection"
+                    self.showErrorAlert = true
+                case .parseError:
+                    self.errorTitle = "Error Parsing JSON"
+                    self.errorMessage = ""
+                    self.showErrorAlert = true
+                }
+            }
+        }
+    }
+}
