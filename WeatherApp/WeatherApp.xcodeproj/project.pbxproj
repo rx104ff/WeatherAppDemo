@@ -23,7 +23,6 @@
 		FCA864CF29299B6E007E2112 /* SHA.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA864CE29299B6E007E2112 /* SHA.swift */; };
 		FCA864D829299E6B007E2112 /* City+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA864D629299E6B007E2112 /* City+CoreDataClass.swift */; };
 		FCA864D929299E6B007E2112 /* City+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA864D729299E6B007E2112 /* City+CoreDataProperties.swift */; };
-		FCA864DC2929A241007E2112 /* TimeScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA864DB2929A241007E2112 /* TimeScheduler.swift */; };
 		FCA864DF292B1240007E2112 /* CityCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA864DE292B1240007E2112 /* CityCellView.swift */; };
 		FCA864E1292B3746007E2112 /* StringConvertor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA864E0292B3746007E2112 /* StringConvertor.swift */; };
 		FCA864E5292B3E18007E2112 /* CityWeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA864E4292B3E18007E2112 /* CityWeatherModel.swift */; };
@@ -80,7 +79,6 @@
 		FCA864CE29299B6E007E2112 /* SHA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHA.swift; sourceTree = "<group>"; };
 		FCA864D629299E6B007E2112 /* City+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "City+CoreDataClass.swift"; sourceTree = "<group>"; };
 		FCA864D729299E6B007E2112 /* City+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "City+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		FCA864DB2929A241007E2112 /* TimeScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeScheduler.swift; sourceTree = "<group>"; };
 		FCA864DE292B1240007E2112 /* CityCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityCellView.swift; sourceTree = "<group>"; };
 		FCA864E0292B3746007E2112 /* StringConvertor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringConvertor.swift; sourceTree = "<group>"; };
 		FCA864E4292B3E18007E2112 /* CityWeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityWeatherModel.swift; sourceTree = "<group>"; };
@@ -222,21 +220,12 @@
 		FCA864CD29297E78007E2112 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				FCA864DA2929A22B007E2112 /* Helpers */,
 				FCA864CB29297DD4007E2112 /* CandidateCityListView.swift */,
 				FCA864852927499B007E2112 /* CityListView.swift */,
 				FCA864DE292B1240007E2112 /* CityCellView.swift */,
 				FCA864EA292B6EA4007E2112 /* CityDetailView.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		FCA864DA2929A22B007E2112 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				FCA864DB2929A241007E2112 /* TimeScheduler.swift */,
-			);
-			path = Helpers;
 			sourceTree = "<group>";
 		};
 		FCA864DD292ADB4F007E2112 /* Utils */ = {
@@ -391,7 +380,6 @@
 				FCA864D829299E6B007E2112 /* City+CoreDataClass.swift in Sources */,
 				FCA864CF29299B6E007E2112 /* SHA.swift in Sources */,
 				FCA864DF292B1240007E2112 /* CityCellView.swift in Sources */,
-				FCA864DC2929A241007E2112 /* TimeScheduler.swift in Sources */,
 				FCA864D929299E6B007E2112 /* City+CoreDataProperties.swift in Sources */,
 				FCA864C629295FA8007E2112 /* CurrentWeatherModel.swift in Sources */,
 				FCA864B329275EF6007E2112 /* OpenWeatherAPIClient.swift in Sources */,

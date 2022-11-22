@@ -28,9 +28,9 @@ struct CityListView: View {
                     return fruit.name!.contains(inputString) || inputString == ""
                 }), id: \.self) { item in
                     NavigationLink {
-                        CityDetailView(city: item)
+                        CityDetailView(cityWeatherViewModel: CityWeatherViewModel(city: item))
                     } label: {
-                        CityCellView(city: item, showErrorAlert: $showErrorAlert, errorTitle: $errorTitle, errorMessage: $errorMessage)
+                        CityCellView(cityWeatherViewModel: CityWeatherViewModel(city: item))
                     }
                 }
                 .onDelete(perform: removeCity)

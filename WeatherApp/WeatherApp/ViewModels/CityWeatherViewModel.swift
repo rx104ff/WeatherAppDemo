@@ -13,12 +13,15 @@ class CityWeatherViewModel: ObservableObject {
     @Published var errorTitle: String = ""
     @Published var errorMessage: String = ""
     @Published var showErrorAlert: Bool = false
+    @Published var now: Double = Date().timeIntervalSince1970
 
     var timer: Timer?
     init(city: City) {
         self.cityWeatherModel = CityWeatherModel(city: city)
+        
         self.refresh()
-        timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true, block: { _ in
+
+        timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true, block: { _ in
             self.refresh()
         })
     }
@@ -32,6 +35,7 @@ class CityWeatherViewModel: ObservableObject {
             case .success(let currentWeather):
                 DispatchQueue.main.async {
                     self.cityWeatherModel.currentWeather = currentWeather
+                    self.now = Date().timeIntervalSince1970
                 }
             case .failure(let error):
                 switch error {
