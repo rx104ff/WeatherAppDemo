@@ -24,13 +24,13 @@ struct CityListView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(cities.filter({ (fruit: City) -> Bool in
-                    return fruit.name!.contains(inputString) || inputString == ""
-                }), id: \.self) { item in
+                ForEach(cities.filter({ (city: City) -> Bool in
+                    return city.name!.contains(inputString) || city.country!.contains(inputString) || city.state!.contains(inputString) || inputString == ""
+                }), id: \.self) { city in
                     NavigationLink {
-                        CityDetailView(cityWeatherViewModel: CityWeatherViewModel(city: item))
+                        CityDetailView(cityWeatherViewModel: CityWeatherViewModel(city: city))
                     } label: {
-                        CityCellView(cityWeatherViewModel: CityWeatherViewModel(city: item))
+                        CityCellView(cityWeatherViewModel: CityWeatherViewModel(city: city))
                     }
                 }
                 .onDelete(perform: removeCity)
@@ -75,6 +75,7 @@ struct CityListView: View {
                 switch result {
                 case .success(let cities):
                     candidateCities = cities
+                    self.inputString = ""
                     showCandidateCityList = true
                 case .failure(let error):
                     switch error {
