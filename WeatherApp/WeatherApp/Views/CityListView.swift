@@ -35,6 +35,7 @@ struct CityListView: View {
                 }
                 .onDelete(perform: removeCity)
             }
+            .navigationBarTitle("Cities", displayMode: .large)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     TextField(
@@ -80,17 +81,29 @@ struct CityListView: View {
                 case .failure(let error):
                     switch error {
                     case .serverSideError(let statusCode, let message):
-                        errorTitle = "Status: \(statusCode)"
-                        errorMessage = message
-                        showErrorAlert = true
+                        DispatchQueue.main.async {
+                            self.errorTitle = "Status: \(statusCode)"
+                            self.errorMessage = message
+                            self.showErrorAlert = true
+                        }
                     case .transportError:
-                        errorTitle = "Connection Issues"
-                        errorMessage = "Please Check the Internet Connection"
-                        showErrorAlert = true
+                        DispatchQueue.main.async {
+                            self.errorTitle = "Connection Issues"
+                            self.errorMessage = "Please Check the Internet Connection"
+                            self.showErrorAlert = true
+                        }
                     case .parseError:
-                        errorTitle = "Error Parsing JSON"
-                        errorMessage = ""
-                        showErrorAlert = true
+                        DispatchQueue.main.async {
+                            self.errorTitle = "Error Parsing JSON"
+                            self.errorMessage = ""
+                            self.showErrorAlert = true
+                        }
+                    case .internetConnectionError:
+                        DispatchQueue.main.async {
+                            self.errorTitle = "No Internet"
+                            self.errorMessage = "Please connection to the Internet while using the APP"
+                            self.showErrorAlert = true
+                        }
                     }
                 }
             }

@@ -14,13 +14,13 @@ class CityWeatherViewModel: ObservableObject {
     @Published var errorMessage: String = ""
     @Published var showErrorAlert: Bool = false
     @Published var now: Double = Date().timeIntervalSince1970
-
+    
     var timer: Timer?
     init(city: City) {
         self.cityWeatherModel = CityWeatherModel(city: city)
         
         self.refresh()
-
+        
         timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true, block: { _ in
             self.refresh()
         })
@@ -40,17 +40,29 @@ class CityWeatherViewModel: ObservableObject {
             case .failure(let error):
                 switch error {
                 case .serverSideError(let statusCode, let message):
-                    self.errorTitle = "Status: \(statusCode)"
-                    self.errorMessage = message
-                    self.showErrorAlert = true
+                    DispatchQueue.main.async {
+                        self.errorTitle = "Status: \(statusCode)"
+                        self.errorMessage = message
+                        self.showErrorAlert = true
+                    }
                 case .transportError:
-                    self.errorTitle = "Connection Issues"
-                    self.errorMessage = "Please Check the Internet Connection"
-                    self.showErrorAlert = true
+                    DispatchQueue.main.async {
+                        self.errorTitle = "Connection Issues"
+                        self.errorMessage = "Please Check the Internet Connection"
+                        self.showErrorAlert = true
+                    }
                 case .parseError:
-                    self.errorTitle = "Error Parsing JSON"
-                    self.errorMessage = ""
-                    self.showErrorAlert = true
+                    DispatchQueue.main.async {
+                        self.errorTitle = "Error Parsing JSON"
+                        self.errorMessage = ""
+                        self.showErrorAlert = true
+                    }
+                case .internetConnectionError:
+                    DispatchQueue.main.async {
+                        self.errorTitle = "No Internet"
+                        self.errorMessage = "Please connection to the Internet while using the APP"
+                        self.showErrorAlert = true
+                    }
                 }
             }
         }

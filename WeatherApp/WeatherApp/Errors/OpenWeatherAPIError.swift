@@ -8,6 +8,7 @@
 import Foundation
 
 enum OpenWeatherAPIError: Error {
+    case internetConnectionError
     case transportError
     case serverSideError(Int, String)
     case parseError

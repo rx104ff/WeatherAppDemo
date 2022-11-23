@@ -32,15 +32,23 @@ struct CityCellView: View {
             Spacer()
             
             VStack(alignment: .trailing) {
-                Text("\(cityWeatherViewModel.cityWeatherModel.currentWeather == nil ? "" : StringConvertor.temperatureFormat(rawTemp: cityWeatherViewModel.cityWeatherModel.currentWeather!.main.temp))")
+                Text("\(cityWeatherViewModel.cityWeatherModel.currentWeather == nil ? "N/A" : StringConvertor.temperatureFormat(rawTemp: cityWeatherViewModel.cityWeatherModel.currentWeather!.main.temp))")
                     .bold().font(.system(size: 38))
                 
                 Spacer()
                 
-                Text("\(cityWeatherViewModel.cityWeatherModel.currentWeather == nil ? "" : cityWeatherViewModel.cityWeatherModel.currentWeather!.weather[0].main)")
+                Text("\(cityWeatherViewModel.cityWeatherModel.currentWeather == nil ? "N/A" : cityWeatherViewModel.cityWeatherModel.currentWeather!.weather[0].main)")
             }
         }
         .frame(minHeight: 100.0)
-
+        .alert(isPresented: Binding<Bool>(
+            get: { self.cityWeatherViewModel.showErrorAlert },
+            set: { _ in self.cityWeatherViewModel.showErrorAlert = false }
+        )) {
+            Alert(
+                title: Text(cityWeatherViewModel.errorTitle),
+                message: Text(cityWeatherViewModel.errorMessage)
+            )
+        }
     }
 }

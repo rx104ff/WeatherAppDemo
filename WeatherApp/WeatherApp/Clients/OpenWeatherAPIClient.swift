@@ -30,7 +30,10 @@ class OpenWeatherAPIClient {
             fatalError()
         }
         urlSession.dataTask(with: url) { (data, response, error) in
-            guard let data = data else { return }
+            guard let data = data else {
+                completion(Result.failure(OpenWeatherAPIError.internetConnectionError))
+                return
+            }
             
             if error != nil {
                 completion(Result.failure(OpenWeatherAPIError.transportError))
@@ -63,8 +66,11 @@ class OpenWeatherAPIClient {
         }
 
         urlSession.dataTask(with: url) { (data, response, error) in
-            guard let data = data else { return }
-            
+            guard let data = data else {
+                completion(Result.failure(OpenWeatherAPIError.internetConnectionError))
+                return
+            }
+
             if error != nil {
                 completion(Result.failure(OpenWeatherAPIError.transportError))
                 return
